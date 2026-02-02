@@ -8,7 +8,7 @@
 @section('og_image', asset('ogp.png'))
 
 @section('content')
-  <section class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
+  <section class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12" data-gsap-fade>
     <div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
       <div>
         <h1 class="text-2xl sm:text-3xl font-semibold tracking-tight">Works</h1>

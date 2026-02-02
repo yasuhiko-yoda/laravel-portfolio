@@ -8,7 +8,7 @@
 @section('og_image', asset('ogp.png'))
 
 @section('content')
-  <section class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
+  <section class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12" data-gsap-fade>
     <div class="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:items-center">
       <div>
         <h1 class="text-3xl sm:text-4xl font-semibold tracking-tight">
@@ -44,7 +44,7 @@
     </div>
   </section>
 
-  <section class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-16">
+  <section class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-16" data-gsap-fade>
     <div class="flex items-end justify-between">
       <h2 class="text-lg font-semibold">Latest Works</h2>
       <a href="{{ route('works.index') }}" class="text-sm text-slate-600 hover:text-slate-900">一覧へ</a>
@@ -53,10 +53,11 @@
     <div class="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
       @foreach($latest as $p)
         <a href="{{ route('works.show', $p) }}"
+			data-gsap-card
            class="group rounded-2xl border border-slate-200 bg-white overflow-hidden hover:shadow-sm transition">
           <div class="aspect-[16/10] bg-slate-100">
             @if($p->thumbnail)
-              <img src="{{ $p->thumbnail }}" alt="" class="h-full w-full object-cover">
+              <img src="{{ $p->thumbnail }}" alt="" data-gsap-img class="h-full w-full object-cover">
             @endif
           </div>
           <div class="p-5">

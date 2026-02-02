@@ -20,7 +20,7 @@
 @section('twitter_image', $portfolio->thumbnail ?: asset('ogp.png'))
 
 @section('content')
-  <section class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-10">
+  <section class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-10" data-gsap-fade>
     <div class="flex items-center justify-between gap-3">
       <a href="{{ route('works.index') }}" class="text-sm text-slate-600 hover:text-slate-900">← 一覧へ</a>
       <div class="text-xs text-slate-500">{{ $portfolio->category?->name }}</div>
