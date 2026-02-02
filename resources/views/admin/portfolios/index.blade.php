@@ -1,8 +1,14 @@
 {{-- resources/views/admin/portfolios/index.blade.php --}}
 @extends('layouts.admin.app')
 
-@section('title', '作品管理')
+{{-- @section('title', '作品管理') --}}
 @section('page_title', '作品一覧')
+@section('meta_title', 'Works - '.config('app.name'))
+@section('meta_description', '制作実績の一覧ページです。カテゴリで絞り込んで閲覧できます。')
+@section('og_type', 'website')
+@section('og_url', route('works.index', request()->query()))
+@section('og_image', asset('ogp.png'))
+
 @section('page_actions')
   <a href="{{ route('portfolios.create') }}"
      class="inline-flex items-center justify-center rounded-md bg-slate-900 px-4 py-2 text-sm font-medium text-white hover:bg-slate-800">

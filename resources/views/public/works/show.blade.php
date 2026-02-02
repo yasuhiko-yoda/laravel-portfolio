@@ -1,6 +1,23 @@
 @extends('layouts.public.app')
 
-@section('title', $portfolio->title)
+{{-- @section('title', $portfolio->title) --}}
+@section('meta_title', $portfolio->title.' - '.config('app.name'))
+
+@section('meta_description',
+  \Illuminate\Support\Str::limit(
+    trim(preg_replace('/\s+/', ' ', $portfolio->description ?? '')),
+    120,
+    '...'
+  )
+)
+
+@section('og_type', 'article')
+@section('og_url', route('works.show', $portfolio))
+
+{{-- thumbnailがURLで入っている前提。空ならデフォルトOGP --}}
+@section('og_image', $portfolio->thumbnail ?: asset('ogp.png'))
+
+@section('twitter_image', $portfolio->thumbnail ?: asset('ogp.png'))
 
 @section('content')
   <section class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-10">

@@ -1,6 +1,11 @@
 @extends('layouts.public.app')
 
-@section('title', 'Works')
+{{-- @section('title', 'Works') --}}
+@section('meta_title', 'Works - '.config('app.name'))
+@section('meta_description', '制作実績の一覧ページです。カテゴリで絞り込んで閲覧できます。')
+@section('og_type', 'website')
+@section('og_url', route('works.index', request()->query()))
+@section('og_image', asset('ogp.png'))
 
 @section('content')
   <section class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">

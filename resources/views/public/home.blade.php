@@ -1,6 +1,11 @@
 @extends('layouts.public.app')
 
-@section('title', 'Home')
+{{-- @section('title', 'Home') --}}
+@section('meta_title', 'Home - '.config('app.name'))
+@section('meta_description', 'Laravel 12で作成したポートフォリオサイトです。制作実績（Works）をまとめています。')
+@section('og_type', 'website')
+@section('og_url', route('home'))
+@section('og_image', asset('ogp.png'))
 
 @section('content')
   <section class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
