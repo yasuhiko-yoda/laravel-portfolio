@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\PortfolioController;
+use App\Http\Controllers\WorkController;
 use Illuminate\Support\Facades\Route;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -32,3 +34,7 @@ Route::prefix('admin')
     ->group(function () {
         Route::resource('portfolios', PortfolioController::class);
     });
+
+Route::get('/', [WorkController::class, 'home'])->name('home');
+Route::get('/works', [WorkController::class, 'index'])->name('works.index');
+Route::get('/works/{portfolio}', [WorkController::class, 'show'])->name('works.show');
