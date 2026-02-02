@@ -11,7 +11,7 @@
 @endsection
 
 @section('content')
-  <form method="POST" action="{{ route('portfolios.store') }}" class="space-y-6">
+  <form method="POST" action="{{ route('portfolios.store') }}" class="space-y-6" enctype="multipart/form-data">
     @include('admin.portfolios._form', ['portfolio' => new \App\Models\Portfolio()])
     <div class="flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
       <a href="{{ route('portfolios.index') }}"

@@ -15,7 +15,7 @@
 @endsection
 
 @section('content')
-  <form method="POST" action="{{ route('portfolios.update', $portfolio) }}" class="space-y-6">
+  <form method="POST" action="{{ route('portfolios.update', $portfolio) }}" class="space-y-6" enctype="multipart/form-data">
     @method('PUT')
     @include('admin.portfolios._form')
     <div class="flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">

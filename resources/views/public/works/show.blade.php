@@ -32,9 +32,18 @@
 
     <div class="mt-6 rounded-2xl border border-slate-200 bg-slate-100 overflow-hidden">
       <div class="aspect-[16/10]">
-        @if($portfolio->thumbnail)
+		@php
+			$thumb = $portfolio->thumbnail
+			? (str_starts_with($portfolio->thumbnail, 'http') ? $portfolio->thumbnail : asset('storage/'.$portfolio->thumbnail))
+			: null;
+		@endphp
+
+		@if($thumb)
+			<img src="{{ $thumb }}" alt="" data-gsap-img class="h-full w-full object-cover">
+		@endif
+        {{-- @if($portfolio->thumbnail)
           <img src="{{ $portfolio->thumbnail }}" alt="" class="h-full w-full object-cover">
-        @endif
+        @endif --}}
       </div>
     </div>
 

@@ -10,6 +10,8 @@ use App\Http\Requests\UpdatePortfolioRequest;
 use App\Models\Category;
 use App\Models\Portfolio;
 
+use Illuminate\Support\Facades\Storage;
+
 class PortfolioController extends Controller
 {
     /**
@@ -35,7 +37,18 @@ class PortfolioController extends Controller
      */
     public function store(StorePortfolioRequest $request)
     {
-        Portfolio::create($request->validated());
+        // Portfolio::create($request->validated());
+        // return redirect()->route('portfolios.index')->with('status', '作品を登録しました');
+        $data = $request->validated();
+
+        // ファイルが来たら保存して thumbnail にパスを入れる
+        if ($request->hasFile('thumbnail_file')) {
+            $path = $request->file('thumbnail_file')->store('thumbnails', 'public');
+            $data['thumbnail'] = $path; // 例：thumbnails/xxx.webp
+        }
+
+        Portfolio::create($data);
+
         return redirect()->route('portfolios.index')->with('status', '作品を登録しました');
     }
 
@@ -62,8 +75,23 @@ class PortfolioController extends Controller
      */
     public function update(UpdatePortfolioRequest $request, Portfolio $portfolio)
     {
-        $portfolio->update($request->validated());
-        return redirect()->route('portfolios.index')->with('status', '作品を更新しました');
+        // $portfolio->update($request->validated());
+        // return redirect()->route('portfolios.index')->with('status', '作品を更新しました');
+        $data = $request->validated();
+
+        if ($request->hasFile('thumbnail_file')) {
+            // 古いファイル削除（thumbnailが保存パスの場合のみ）
+            if ($portfolio->thumbnail && Storage::disk('public')->exists($portfolio->thumbnail)) {
+                Storage::disk('public')->delete($portfolio->thumbnail);
+            }
+
+            $path = $request->file('thumbnail_file')->store('thumbnails', 'public');
+            $data['thumbnail'] = $path;
+        }
+
+        $portfolio->update($data);
+
+        return redirect()->route('portfolios.edit', $portfolio)->with('status', '更新しました');
     }
 
     /**

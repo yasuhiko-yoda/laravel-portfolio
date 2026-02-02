@@ -24,9 +24,11 @@ class StorePortfolioRequest extends FormRequest
         return [
             'title' => ['required', 'string', 'max:255'],
             'url' => ['nullable', 'url', 'max:2048'],
-            'thumbnail' => ['nullable', 'string', 'max:2048'],
+            // 'thumbnail' => ['nullable', 'string', 'max:2048'],
             'description' => ['nullable', 'string'],
             'category_id' => ['required', 'integer', 'exists:categories,id'],
+            // 追加：ファイルアップロード
+            'thumbnail_file' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
         ];
     }
 }

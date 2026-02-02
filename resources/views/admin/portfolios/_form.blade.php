@@ -73,7 +73,7 @@
         </div>
 
         {{-- サムネイル（まずは文字列：URL or storageパス） --}}
-        <div>
+        {{-- <div>
           <label class="block text-sm font-medium text-slate-700">サムネイル（URL / パス）</label>
           <input
             name="thumbnail"
@@ -85,6 +85,22 @@
           <p class="mt-2 text-xs text-slate-500">
             画像アップロード対応は後で追加できます（今はURL/パスでもOK）。
           </p>
+        </div> --}}
+        <div>
+          <label class="block text-sm font-medium text-slate-700">サムネイル（アップロード）</label>
+          <input type="file" name="thumbnail_file" accept="image/*"
+                class="mt-2 block w-full text-sm
+                        file:mr-4 file:rounded-md file:border file:border-slate-200 file:bg-white
+                        file:px-4 file:py-2 file:text-sm file:font-medium hover:file:bg-slate-50" >
+          @error('thumbnail_file')<p class="mt-2 text-sm text-rose-600">{{ $message }}</p>@enderror
+
+          @if(!empty($portfolio?->thumbnail))
+            <div class="mt-3">
+              <div class="text-xs text-slate-500 mb-2">現在の画像</div>
+              <img src="{{ asset('storage/'.$portfolio->thumbnail) }}"
+                  class="h-24 w-40 rounded-md object-cover border border-slate-200" alt="">
+            </div>
+          @endif
         </div>
 
         {{-- 説明 --}}

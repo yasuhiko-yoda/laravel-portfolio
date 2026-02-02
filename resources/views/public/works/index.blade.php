@@ -34,9 +34,18 @@
         <a href="{{ route('works.show', $p) }}"
            class="group rounded-2xl border border-slate-200 bg-white overflow-hidden hover:shadow-sm transition">
           <div class="aspect-[16/10] bg-slate-100">
-            @if($p->thumbnail)
+            {{-- @if($p->thumbnail)
               <img src="{{ $p->thumbnail }}" alt="" class="h-full w-full object-cover">
-            @endif
+            @endif --}}
+			@php
+				$thumb = $p->thumbnail
+				? (str_starts_with($p->thumbnail, 'http') ? $p->thumbnail : asset('storage/'.$p->thumbnail))
+				: null;
+			@endphp
+
+			@if($thumb)
+				<img src="{{ $thumb }}" data-gsap-img alt="" class="h-full w-full object-cover">
+			@endif
           </div>
           <div class="p-5">
             <div class="text-xs text-slate-500">{{ $p->category?->name }}</div>
